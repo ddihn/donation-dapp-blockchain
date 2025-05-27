@@ -1,4 +1,4 @@
-# 📦 Hope Chain - Donation DApp
+# 🔗 Hope Chain - Donation DApp
 
 블록체인 기반 기부 DApp (Decentralized Application)  
 Solidity 스마트 컨트랙트 + Web3.js 프론트엔드 + Ganache 로컬 블록체인 환경에서 개발한 투명한 기부 서비스
