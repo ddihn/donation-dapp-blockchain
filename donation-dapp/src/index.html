@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hope Chain🔗</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+  </head>
+  <body>
+    <header class="intro">
+      <h1>🔗Hope Chain🔗</h1>
+      <p>
+        블록체인 기반으로 모든 기부 내역을 투명하게 공개하는 신뢰할 수 있는
+        DApp입니다.<br />
+        기부, 관리자 활동, 출금 내역까지 모두 기록되고 누구나 확인할 수
+        있습니다.
+      </p>
+    </header>
+    <nav class="navbar">
+      <div class="logo">Hope Chain🔗</div>
+      <div class="nav-buttons">
+        <button onclick="toggleGuide()">이용 가이드💌</button>
+        <button onclick="showTab('donate')">기부하기</button>
+        <button onclick="showTab('stats')">기부 현황 및 로그</button>
+        <button onclick="showTab('withdraw')">기부금 출금</button>
+        <button onclick="showTab('admin')">관리자 관리</button>
+      </div>
+    </nav>
+    <!-- 사용자 선택 영역 -->
+    <div class="account-selector">
+      <label for="currentAccount">현재 사용자 선택:</label>
+      <select id="currentAccount" onchange="updateCurrentAccount()"></select>
+      <span
+        id="currentRoleLabel"
+        style="margin-left: 10px; font-weight: bold; color: #4caf50"
+        >(역할 확인 중...)</span
+      >
+    </div>
+    <main>
+      <div id="warningBanner" class="warning-banner" style="display: none">
+        <span id="warningMessage"></span>
+      </div>
+      <section id="donate" class="active">
+        <h2>기부하기</h2>
+        <label for="beneficiarySelect">기부 받을 지갑 주소 선택 : </label>
+        <select id="beneficiarySelect"></select>
+        <input type="number" id="amount" placeholder="기부 금액 (ETH)" />
+        <button onclick="donate()">기부 보내기</button>
+      </section>
+
+      <section id="stats">
+        <h2>기부 현황</h2>
+        <div id="balance">컨트랙트 잔액: 불러오는 중...</div>
+        <h3>트랜잭션 로그</h3>
+        <div
+          id="transactionLog"
+          style="
+            background: #f4f4f4;
+            padding: 10px;
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+          "
+        >
+          <p>로그 기록이 여기에 표시됩니다.</p>
+        </div>
+      </section>
+
+      <section id="withdraw">
+        <h2>기부금 출금 (**관리자 계정 접속으로만 가능)</h2>
+        <label for="withdrawSelect">출금 받을 주소 선택 : </label>
+        <select id="withdrawSelect"></select>
+        <input
+          type="number"
+          id="withdrawAmount"
+          placeholder="출금 금액 (ETH)"
+        />
+        <button onclick="withdraw()">출금하기</button>
+      </section>
+
+      <section id="admin">
+        <h2>관리자 관리 (**소유자 계정 접속으로만 가능)</h2>
+        <label for="adminSelect">관리자 주소 선택:</label>
+        <select id="adminSelect"></select>
+        <button onclick="addAdmin()">관리자 추가</button>
+        <button onclick="removeAdmin()">관리자 제거</button>
+      </section>
+    </main>
+
+    <div id="guideModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="toggleGuide()">&times;</span>
+        <h3>사용 가이드</h3>
+        <hr />
+        <p>1️⃣ 배포자는 자동으로 소유자가 되며, 관리자 권한도 가집니다.</p>
+        <p>2️⃣ 소유자와 관리자는 기부금을 출금할 수 있습니다.</p>
+        <p>3️⃣ 추가 관리자는 소유자가 관리자 탭에서 추가/제거 가능합니다.</p>
+        <p>
+          4️⃣ 기부 탭에서 받을 지갑 주소를 선택 후 금액을 입력해 기부해보세요!
+        </p>
+        <p>
+          5️⃣ 현재 모금액과 트랜잭션 내역은 기부 현황 및 로그 탭에서 투명하게
+          확인가능합니다.
+        </p>
+        <hr />
+        <p>⚠️ 페이지를 새로고침하면 기존 로그가 사라지니 주의하세요.</p>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
